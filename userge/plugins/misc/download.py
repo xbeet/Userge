@@ -41,11 +41,11 @@ async def down_load_media(message: Message):
     try:
         dl_loc, d_in = await handle_download(message, resource)
     except ProcessCanceled:
-        await message.edit("`Process Canceled!`", del_in=5)
+        await message.edit("`Process Canceled❗`", del_in=5)
     except Exception as e_e:  # pylint: disable=broad-except
         await message.err(str(e_e))
     else:
-        await message.edit(f"Downloaded to `{dl_loc}` in {d_in} seconds")
+        await message.edit(f"Downloaded to ➤ `{dl_loc}` in {d_in} seconds")
 
 
 async def handle_download(message: Message, resource: Union[Message, str]) -> Tuple[str, int]:
@@ -57,7 +57,7 @@ async def handle_download(message: Message, resource: Union[Message, str]) -> Tu
 
 async def url_download(message: Message, url: str) -> Tuple[str, int]:
     """ download from link """
-    await message.edit("`Downloading From URL...`")
+    await message.edit("`♻️ Downloading From URL.....`")
     start_t = datetime.now()
     custom_file_name = unquote_plus(os.path.basename(url))
     if "|" in url:
@@ -81,15 +81,15 @@ async def url_download(message: Message, url: str) -> Tuple[str, int]:
         progress_str = \
             "__{}__\n" + \
             "```[{}{}]```\n" + \
-            "**Progress** : `{}%`\n" + \
-            "**URL** : `{}`\n" + \
-            "**FILENAME** : `{}`\n" + \
-            "**Completed** : `{}`\n" + \
-            "**Total** : `{}`\n" + \
-            "**Speed** : `{}`\n" + \
-            "**ETA** : `{}`"
+            "🥏**Progress** : `{}%`\n" + \
+            "📎**URL** : `{}`\n" + \
+            "📂**FILENAME** : `{}`\n" + \
+            "📡**Completed** : `{}`\n" + \
+            "🧰**Total** : `{}`\n" + \
+            "🚀**Speed** : `{}`\n" + \
+            "⏳**ETA** : `{}`"
         progress_str = progress_str.format(
-            "trying to download",
+            "Trying to download....📥",
             ''.join((Config.FINISHED_PROGRESS_STR
                      for _ in range(math.floor(percentage / 5)))),
             ''.join((Config.UNFINISHED_PROGRESS_STR
@@ -111,7 +111,7 @@ async def url_download(message: Message, url: str) -> Tuple[str, int]:
 
 async def tg_download(message: Message, to_download: Message) -> Tuple[str, int]:
     """ download from tg file """
-    await message.edit("`Downloading From TG...`")
+    await message.edit("`♻️ Downloading From TG.....`")
     start_t = datetime.now()
     custom_file_name = Config.DOWN_PATH
     if message.filtered_input_str:
@@ -120,7 +120,7 @@ async def tg_download(message: Message, to_download: Message) -> Tuple[str, int]
         message=to_download,
         file_name=custom_file_name,
         progress=progress,
-        progress_args=(message, "trying to download")
+        progress_args=(message, "Trying to download....📥")
     )
     if message.process_is_canceled:
         raise ProcessCanceled
