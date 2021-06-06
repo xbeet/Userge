@@ -245,12 +245,12 @@ class _GDrive:
                     tmp = \
                         "♻️ __Uploading to GDrive....__\n" + \
                         "```[{}{}]({}%)```\n" + \
-                        "**File Name** : `{}`\n" + \
-                        "**File Size** : `{}`\n" + \
-                        "**Uploaded** : `{}`\n" + \
-                        "**Completed** : `{}/{}`\n" + \
-                        "**Speed** : `{}/s`\n" + \
-                        "**ETA** : `{}`"
+                        "📂**File Name** : `{}`\n" + \
+                        "🧰**File Size** : `{}`\n" + \
+                        "🔺**Uploaded** : `{}`\n" + \
+                        "📡**Completed** : `{}/{}`\n" + \
+                        "🚀**Speed** : `{}/s`\n" + \
+                        "⏳**ETA** : `{}`"
                     self._progress = tmp.format(
                         "".join((Config.FINISHED_PROGRESS_STR
                                  for _ in range(math.floor(percentage / 5)))),
@@ -318,7 +318,7 @@ class _GDrive:
             _LOG.exception(h_e)
             self._output = h_e
         except ProcessCanceled:
-            self._output = "`Process Canceled!`"
+            self._output = "`Process Canceled❗`"
         finally:
             self._finish()
 
@@ -340,14 +340,14 @@ class _GDrive:
                     speed = round(downloaded / diff, 2)
                     eta = round((f_size - downloaded) / speed)
                     tmp = \
-                        "__Downloading From GDrive...__\n" + \
+                        "♻️ __Downloading From GDrive.....__\n" + \
                         "```[{}{}]({}%)```\n" + \
-                        "**File Name** : `{}`\n" + \
-                        "**File Size** : `{}`\n" + \
-                        "**Downloaded** : `{}`\n" + \
-                        "**Completed** : `{}/{}`\n" + \
-                        "**Speed** : `{}/s`\n" + \
-                        "**ETA** : `{}`"
+                        "📂**File Name** : `{}`\n" + \
+                        "🧰**File Size** : `{}`\n" + \
+                        "🔻**Downloaded** : `{}`\n" + \
+                        "📡**Completed** : `{}/{}`\n" + \
+                        "🚀**Speed** : `{}/s`\n" + \
+                        "⏳**ETA** : `{}`"
                     self._progress = tmp.format(
                         "".join((Config.FINISHED_PROGRESS_STR
                                  for _ in range(math.floor(percentage / 5)))),
@@ -422,7 +422,7 @@ class _GDrive:
             _LOG.exception(h_e)
             self._output = h_e
         except ProcessCanceled:
-            self._output = "`Process Canceled!`"
+            self._output = "`Process Canceled❗`"
         finally:
             self._finish()
 
@@ -436,9 +436,9 @@ class _GDrive:
             body=body, fileId=file_id, supportsTeamDrives=True).execute()
         percentage = (self._completed / self._list) * 100
         tmp = \
-            "__Copying Files In GDrive...__\n" + \
+            "♻️ __Copying Files In GDrive.....__\n" + \
             "```[{}{}]({}%)```\n" + \
-            "**Completed** : `{}/{}`"
+            "📡**Completed** : `{}/{}`"
         self._progress = tmp.format(
             "".join((Config.FINISHED_PROGRESS_STR
                      for _ in range(math.floor(percentage / 5)))),
@@ -485,7 +485,7 @@ class _GDrive:
             _LOG.exception(h_e)
             self._output = h_e
         except ProcessCanceled:
-            self._output = "`Process Canceled!`"
+            self._output = "`Process Canceled❗`"
         finally:
             self._finish()
 
@@ -646,7 +646,7 @@ class Worker(_GDrive):
         global _PARENT_ID  # pylint: disable=global-statement
         file_id, file_type = self._get_file_id()
         if file_type != "folder":
-            await self._message.err("Please send me a folder link")
+            await self._message.err("Please send me a folder link🙄")
         else:
             _PARENT_ID = file_id
             await self._message.edit(
@@ -675,7 +675,7 @@ class Worker(_GDrive):
     @creds_dec
     async def search(self) -> None:
         """ Search files in GDrive """
-        await self._message.edit("`Loading GDrive Search...`")
+        await self._message.edit("`Loading GDrive Search.....😌`")
         try:
             out = await self._search(
                 self._message.filtered_input_str, self._message.flags)
