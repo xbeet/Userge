@@ -114,11 +114,11 @@ async def carbon_(message: Message):
             else:
                 code = input_str
         else:
-            await message.err("need input text!")
+            await message.err("need input text❗")
             return
-        await message.edit("`Creating a Carbon...`")
+        await message.edit("`Creating a Carbon......🧤`")
         code = quote_plus(code)
-        await message.edit("`Processing... 20%`")
+        await message.edit("`Processing..... 20%`")
         carbon_path = os.path.join(Config.DOWN_PATH, "carbon.png")
         if os.path.isfile(carbon_path):
             os.remove(carbon_path)
@@ -137,7 +137,7 @@ async def carbon_(message: Message):
         chrome_options.add_experimental_option('prefs', prefs)
         driver = webdriver.Chrome(chrome_options=chrome_options)
         driver.get(url)
-        await message.edit("`Processing... 40%`")
+        await message.edit("`Processing..... 40%`")
         driver.command_executor._commands["send_command"] = (  # pylint: disable=protected-access
             "POST", '/session/$sessionId/chromium/send_command')
         params = {
@@ -151,15 +151,15 @@ async def carbon_(message: Message):
         # driver.find_element_by_xpath("//button[contains(text(),'Export')]").click()
         driver.find_element_by_id("export-menu").click()
         await asyncio.sleep(1)
-        await message.edit("`Processing... 60%`")
+        await message.edit("`Processing..... 60%`")
         driver.find_element_by_xpath("//button[contains(text(),'4x')]").click()
         await asyncio.sleep(1)
         driver.find_element_by_id("export-png").click()
-        await message.edit("`Processing... 80%`")
+        await message.edit("`Processing..... 80%`")
         while not os.path.isfile(carbon_path):
             await asyncio.sleep(0.5)
-        await message.edit("`Processing... 100%`")
-        await message.edit("`Uploading Carbon...`")
+        await message.edit("`Processing..... 100%`")
+        await message.edit("`Uploading Carbon...😌`")
         await asyncio.gather(
             message.delete(),
             message.client.send_photo(chat_id=message.chat.id,
