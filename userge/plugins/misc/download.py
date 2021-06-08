@@ -81,13 +81,13 @@ async def url_download(message: Message, url: str) -> Tuple[str, int]:
         progress_str = \
             "__{}__\n" + \
             "```[{}{}]```\n" + \
-            "**🥏 Progress** : `{}%`\n" + \
-            "**📎 URL** : `{}`\n" + \
-            "**📂 FILENAME** : `{}`\n" + \
-            "**📥 Completed** : `{}`\n" + \
-            "**🧰 Total** : `{}`\n" + \
-            "**🚀 Speed** : `{}`\n" + \
-            "**⏳ ETA** : `{}`"
+            "🥏 **Progress** : `{}%`\n" + \
+            "📎 **URL** : `{}`\n" + \
+            "📂 **FILENAME** : `{}`\n" + \
+            "📥 **Completed** : `{}`\n" + \
+            "🧰 **Total** : `{}`\n" + \
+            "🚀 **Speed** : `{}`\n" + \
+            "⏳ **ETA** : `{}`"
         progress_str = progress_str.format(
             "Trying to download....📥",
             ''.join((Config.FINISHED_PROGRESS_STR
