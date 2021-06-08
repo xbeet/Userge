@@ -65,29 +65,29 @@ def _get_mode() -> str:
 def _get_alive_text_and_markup(message: Message) -> Tuple[str, Optional[InlineKeyboardMarkup]]:
     markup = None
     output = f"""
-**⏱ Uptime** : `{userge.uptime}`
-**💡 Version** : `{get_version()}`
-**⚙️ Mode** : `{_get_mode().upper()}`
+╭─•**⏱ Uptime** : `{userge.uptime}`
+├─•**🛸 Version** : `{get_version()}`
+╰─•**🖲️ Mode** : `{_get_mode().upper()}`
 
-• **Sudo**: `{_parse_arg(Config.SUDO_ENABLED)}`
-• **Pm-Guard**: `{_parse_arg(not Config.ALLOW_ALL_PMS)}`
-• **Anti-Spam**: `{_parse_arg(Config.ANTISPAM_SENTRY)}`"""
+╭─•🥷 **Sudo**: `{_parse_arg(Config.SUDO_ENABLED)}`
+├─•🛡 **Pm-Guard**: `{_parse_arg(not Config.ALLOW_ALL_PMS)}`
+├─•🕹 **Anti-Spam**: `{_parse_arg(Config.ANTISPAM_SENTRY)}`"""
     if Config.HEROKU_APP:
-        output += f"\n• **Dyno-saver**: `{_parse_arg(Config.RUN_DYNO_SAVER)}`"
+        output += f"\n├─•🔋 **Dyno-saver**: `{_parse_arg(Config.RUN_DYNO_SAVER)}`"
     output += f"""
-• **Unofficial**: `{_parse_arg(Config.LOAD_UNOFFICIAL_PLUGINS)}`
+╰─•❄️ **Unofficial**: `{_parse_arg(Config.LOAD_UNOFFICIAL_PLUGINS)}`
 
-    **__Python__**: `{versions.__python_version__}`
-    **__Pyrogram__**: `{versions.__pyro_version__}`"""
+    ╭─➤ **__Python__**: `{versions.__python_version__}`
+    ╰─➤ **__Pyrogram__**: `{versions.__pyro_version__}`"""
     if not message.client.is_bot:
         output += f"""\n
-🎖 **{versions.__license__}** | 👥 **{versions.__copyright__}** | 🧪 **[Repo]({Config.UPSTREAM_REPO})**
+🎖 **{versions.__license__}** | 📟 **{versions.__copyright__}** | 🧪 **[Repo]({Config.UPSTREAM_REPO})**
 """
     else:
         copy_ = "https://github.com/UsergeTeam/Userge/blob/master/LICENSE"
         markup = InlineKeyboardMarkup([
             [
-                InlineKeyboardButton(text="👥 UsergeTeam", url="https://github.com/UsergeTeam"),
+                InlineKeyboardButton(text="📟 UsergeTeam", url="https://github.com/UsergeTeam"),
                 InlineKeyboardButton(text="🧪 Repo", url=Config.UPSTREAM_REPO)
             ],
             [InlineKeyboardButton(text="🎖 GNU GPL v3.0", url=copy_)]
