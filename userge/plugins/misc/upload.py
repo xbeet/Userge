@@ -111,7 +111,7 @@ async def _handle_message(message: Message) -> None:
     try:
         dl_loc, _ = await tg_download(message, message.reply_to_message)
     except ProcessCanceled:
-        await message.edit("`Process Canceled!`", del_in=5)
+        await message.edit("`Process Canceled❗`", del_in=5)
     except Exception as e_e:  # pylint: disable=broad-except
         await message.err(str(e_e))
     else:
@@ -166,7 +166,7 @@ async def doc_upload(message: Message, path, del_path: bool = False,
                      extra: str = '', with_thumb: bool = True):
     str_path = str(path)
     sent: Message = await message.client.send_message(
-        message.chat.id, f"`Uploading {str_path} as a doc ... {extra}`")
+        message.chat.id, f"`♻️ Uploading {str_path} as a doc .... {extra}`")
     start_t = datetime.now()
     thumb = None
     if with_thumb:
@@ -181,7 +181,7 @@ async def doc_upload(message: Message, path, del_path: bool = False,
             parse_mode="html",
             disable_notification=True,
             progress=progress,
-            progress_args=(message, f"uploading {extra}", str_path)
+            progress_args=(message, f"uploading...📤 {extra}", str_path)
         )
     except ValueError as e_e:
         await sent.edit(f"Skipping `{str_path}` due to {e_e}")
@@ -206,7 +206,7 @@ async def vid_upload(message: Message, path, del_path: bool = False,
     if metadata and metadata.has("duration"):
         duration = metadata.get("duration").seconds
     sent: Message = await message.client.send_message(
-        message.chat.id, f"`Uploading {str_path} as a video ... {extra}`")
+        message.chat.id, f"`♻️ Uploading {str_path} as a video .... {extra}`")
     start_t = datetime.now()
     await message.client.send_chat_action(message.chat.id, "upload_video")
     width = 0
@@ -229,7 +229,7 @@ async def vid_upload(message: Message, path, del_path: bool = False,
             parse_mode="html",
             disable_notification=True,
             progress=progress,
-            progress_args=(message, f"uploading {extra}", str_path)
+            progress_args=(message, f"uploading...📤 {extra}", str_path)
         )
     except ValueError as e_e:
         await sent.edit(f"Skipping `{str_path}` due to {e_e}")
@@ -273,7 +273,7 @@ async def audio_upload(message: Message, path, del_path: bool = False,
     if metadata and metadata.has("duration"):
         duration = metadata.get("duration").seconds
     sent: Message = await message.client.send_message(
-        message.chat.id, f"`Uploading {str_path} as audio ... {extra}`")
+        message.chat.id, f"`♻️ Uploading {str_path} as audio .... {extra}`")
     start_t = datetime.now()
     await message.client.send_chat_action(message.chat.id, "upload_audio")
     try:
@@ -288,7 +288,7 @@ async def audio_upload(message: Message, path, del_path: bool = False,
             parse_mode="html",
             disable_notification=True,
             progress=progress,
-            progress_args=(message, f"uploading {extra}", str_path)
+            progress_args=(message, f"uploading...📤 {extra}", str_path)
         )
     except ValueError as e_e:
         await sent.edit(f"Skipping `{str_path}` due to {e_e}")
@@ -308,7 +308,7 @@ async def audio_upload(message: Message, path, del_path: bool = False,
 async def photo_upload(message: Message, path, del_path: bool = False, extra: str = ''):
     str_path = str(path)
     sent: Message = await message.client.send_message(
-        message.chat.id, f"`Uploading {path.name} as photo ... {extra}`")
+        message.chat.id, f"`♻️ Uploading {path.name} as photo .... {extra}`")
     start_t = datetime.now()
     await message.client.send_chat_action(message.chat.id, "upload_photo")
     try:
@@ -319,7 +319,7 @@ async def photo_upload(message: Message, path, del_path: bool = False, extra: st
             parse_mode="html",
             disable_notification=True,
             progress=progress,
-            progress_args=(message, f"uploading {extra}", str_path)
+            progress_args=(message, f"uploading...📤 {extra}", str_path)
         )
     except ValueError as e_e:
         await sent.edit(f"Skipping `{str_path}` due to {e_e}")
@@ -369,8 +369,8 @@ async def finalize(message: Message, msg: Message, start_t):
     await CHANNEL.fwd_msg(msg)
     await message.client.send_chat_action(message.chat.id, "cancel")
     if message.process_is_canceled:
-        await message.edit("`Process Canceled!`", del_in=5)
+        await message.edit("`Process Canceled❗`", del_in=5)
     else:
         end_t = datetime.now()
         m_s = (end_t - start_t).seconds
-        await message.edit(f"Uploaded in {m_s} seconds", del_in=10)
+        await message.edit(f"Uploaded in {m_s} seconds😌", del_in=10)
