@@ -83,7 +83,7 @@ def _get_alive_text_and_markup(message: Message) -> Tuple[str, Optional[InlineKe
     ╰─➤ **__Pyrogram__**: `{versions.__pyro_version__}`"""
     if not message.client.is_bot:
         output += f"""\n
-🎖 **{versions.__license__}** | 📟 **{versions.__copyright__}** | 🧪 **[Repo]({versions.__copyright__})**
+🎖 **{versions.__license__}** | 📟 **{versions.__copyright__}** | 🧪 **[Repo]{versions.__copyright__}**
 """
     else:
         copy_ = "https://github.com/UsergeTeam/Userge/blob/master/LICENSE"
